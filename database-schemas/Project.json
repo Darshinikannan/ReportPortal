@@ -103,13 +103,13 @@
     "_id": {
       "$oid": "674a2c3d4e5f6a7b8c9d0e02"
     },
-    "name": "Insurance Portal",
-    "displayName": "Insurance Automation Testing",
-    "description": "Comprehensive testing suite for insurance systems including policies, claims, and customer workflows",
+    "name": "Enterprise Portal",
+    "displayName": "Enterprise Automation Testing",
+    "description": "Comprehensive testing suite for enterprise systems including policies, claims, and customer workflows",
     "portfolioId": {
       "$oid": "674a1b2c3d4e5f6a7b8c9d02"
     },
-    "portfolioName": "Insurance",
+    "portfolioName": "Enterprise",
     "packCount": 1,
     "runCount": 1,
     "totalTests": 25,
@@ -121,7 +121,7 @@
     "health": "good",
     "owner": "Sarah Johnson",
     "ownerEmail": "sarah.johnson@theaa.com",
-    "team": "Insurance QA Team",
+    "team": "Enterprise QA Team",
     "teamMembers": [
       {
         "name": "Sarah Johnson",

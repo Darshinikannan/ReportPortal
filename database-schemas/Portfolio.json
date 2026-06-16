@@ -31,8 +31,8 @@
     "_id": {
       "$oid": "674a1b2c3d4e5f6a7b8c9d02"
     },
-    "name": "Insurance",
-    "description": "Insurance-related automation projects",
+    "name": "Enterprise",
+    "description": "Enterprise-related automation projects",
     "projectCount": 1,
     "packCount": 1,
     "runCount": 1,

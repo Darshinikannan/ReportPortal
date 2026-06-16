@@ -52,3 +52,4 @@ temp/
 # Database
 *.db
 *.sqlite
+.database-schemas/

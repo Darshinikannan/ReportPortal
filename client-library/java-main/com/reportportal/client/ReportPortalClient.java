@@ -9,6 +9,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
+import java.util.List;
 
 /**
  * Main client for submitting test results to Report Portal.
@@ -541,6 +542,48 @@ public class ReportPortalClient {
         
         logger.info("Submitting from config - Portfolio: {}, Project: {}, Pack: {}", portfolio, project, pack);
         return submitRun(portfolio, project, pack, passed, failed, skipped, duration);
+    }
+
+    /**
+     * Submit test run with fully automatic configuration from properties, including individual test case details.
+     * This method allows submitting detailed test case information along with summary counts.
+     * 
+     * @param passed Number of passed tests
+     * @param failed Number of failed tests
+     * @param skipped Number of skipped tests
+     * @param duration Test duration in milliseconds
+     * @param testCases List of individual test case results
+     * @return Submission response
+     * @throws ReportPortalException if submission fails
+     */
+    public static RunSubmissionResponse submitRunFromConfig(int passed, int failed, int skipped, long duration, 
+                                                            List<TestCase> testCases)
+            throws ReportPortalException {
+        
+        ReportPortalConfig config = new ReportPortalConfig();
+        String portfolio = config.getPortfolioName();
+        String project = config.getProjectName();
+        String pack = config.getPackName();
+        
+        if (portfolio == null || portfolio.trim().isEmpty()) {
+            throw new ReportPortalException("Portfolio name not configured in reportportal.properties");
+        }
+        if (project == null || project.trim().isEmpty()) {
+            throw new ReportPortalException("Project name not configured in reportportal.properties");
+        }
+        if (pack == null || pack.trim().isEmpty()) {
+            throw new ReportPortalException("Pack name not configured in reportportal.properties");
+        }
+        
+        // Create submission with test cases
+        RunSubmission submission = new RunSubmission(portfolio, project, pack, passed, failed);
+        submission.setSkipped(skipped);
+        submission.setDuration(duration);
+        submission.setTestResults(testCases);
+        
+        logger.info("Submitting from config - Portfolio: {}, Project: {}, Pack: {}, Test Cases: {}", 
+                    portfolio, project, pack, testCases != null ? testCases.size() : 0);
+        return submitRun(submission, config);
     }
 
     /**

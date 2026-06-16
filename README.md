@@ -2,71 +2,23 @@
 
 A comprehensive test automation reporting and analytics platform with real-time dashboards, hierarchical organization (Portfolio → Project → Pack → Run), and seamless integration with Java test suites.
 
-![Report Portal Dashboard](https://img.shields.io/badge/Status-Production%20Ready-green)
+> 📘 **Integrating your test framework?** See the [Integration Guide](client-library/INTEGRATION_GUIDE.md) for step-by-step instructions.
+
+![Report Portal Dashboard]
 ![Java](https://img.shields.io/badge/Java-11+-blue)
 ![Node.js](https://img.shields.io/badge/Node.js-18+-green)
 ![MongoDB](https://img.shields.io/badge/MongoDB-6.0+-brightgreen)
 
 ## 📋 Table of Contents
 
-- [Features](#features)
-- [Architecture](#architecture)
 - [Quick Start](#quick-start)
-  - [Prerequisites](#prerequisites)
-  - [Backend Setup](#backend-setup)
-  - [Frontend Setup](#frontend-setup)
 - [Java Client Library](#java-client-library)
-  - [Maven Dependency](#maven-dependency)
-  - [Manual JAR Installation](#manual-jar-installation)
-  - [Configuration](#configuration)
-  - [Usage Examples](#usage-examples)
 - [API Documentation](#api-documentation)
 - [Data Model](#data-model)
 - [Development](#development)
 - [Troubleshooting](#troubleshooting)
 
 ---
-
-## ✨ Features
-
-### Core Capabilities
-- **Hierarchical Organization**: Portfolio → Project → Automation Pack → Automation Run
-- **Real-time Dashboard**: Live updates via WebSocket
-- **Comprehensive Metrics**: Pass rates, test counts, execution trends
-- **Smart Entity Resolution**: Auto-creates missing portfolios/projects/packs
-- **CSV Export**: Export data from any view for offline analysis
-- **Pagination**: Handle large datasets efficiently (10 items per page)
-- **Health Monitoring**: Automatic health status based on pass rates
-  - ✅ Good: ≥ 85% pass rate
-  - ⚠️ Fair: 70-84% pass rate
-  - ❌ Poor: < 70% pass rate
-
-### Dashboard Views
-1. **KPI Cards**: Total portfolios, projects, packs, runs, tests (passed/failed)
-2. **Portfolio Preview**: Top 3 portfolios with quick stats
-3. **Recent Launches**: Last 5 automation runs with status indicators
-4. **Detailed Views**: 
-   - Portfolios list
-   - Projects list (with optional portfolio filtering)
-   - Automation packs list
-   - Automation runs history
-
----
-
-## 🏗️ Architecture
-
-```
-┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
-│   Java Client   │────▶│  Node.js Backend │────▶│    MongoDB      │
-│    Library      │     │   (REST + WS)    │     │   (Cloud/Local) │
-└─────────────────┘     └──────────────────┘     └─────────────────┘
-                               │
-                               ▼
-                        ┌──────────────────┐
-                        │  Frontend (HTML) │
-                        │   + JavaScript   │
-                        └──────────────────┘
-```
 
 ### Components
 
@@ -148,214 +100,50 @@ A comprehensive test automation reporting and analytics platform with real-time 
 
 The Report Portal Java client library provides seamless integration with your test automation suites.
 
-### Maven Dependency
+> 📘 **For detailed integration steps**, see the [Integration Guide](client-library/INTEGRATION_GUIDE.md)
 
-**Option 1: From Local Repository** (after building)
+### Quick Setup
 
+**1. Add Maven Dependency:**
 ```xml
 <dependency>
     <groupId>com.reportportal</groupId>
     <artifactId>report-portal-client</artifactId>
     <version>1.0.0</version>
 </dependency>
-
-<!-- SLF4J for logging -->
-<dependency>
-    <groupId>org.slf4j</groupId>
-    <artifactId>slf4j-simple</artifactId>
-    <version>2.0.9</version>
-</dependency>
 ```
 
-**Option 2: Install to Local Maven Repository**
-
+**2. Install to Local Repository:**
 ```bash
 cd client-library
 mvn clean install
 ```
 
-This installs the JAR to: `~/.m2/repository/com/reportportal/report-portal-client/1.0.0/`
-
-### Manual JAR Installation
-
-If not using Maven, you can manually include the JAR:
-
-1. **Build the JAR**:
-   ```bash
-   cd client-library
-   mvn clean package
-   ```
-
-2. **Copy the JAR** from `client-library/target/report-portal-client-1.0.0-with-dependencies.jar`
-
-3. **Add to your project classpath**:
-   - **IntelliJ IDEA**: File → Project Structure → Libraries → Add JAR
-   - **Eclipse**: Right-click project → Build Path → Add External Archives
-   - **Command line**: `java -cp "path/to/report-portal-client-1.0.0-with-dependencies.jar:." YourTestClass`
-
-### Configuration
-
-Create `reportportal.properties` in `src/test/resources/`:
-
+**3. Configure** `src/test/resources/reportportal.properties`:
 ```properties
-# Report Portal Server URL
 reportportal.url=http://localhost:5000
-
-# Required: Hierarchical organization
-reportportal.portfolio=Enterprise
-reportportal.project=Automation
-reportportal.pack=Keycloak
-
-# Optional: Enable/disable reporting
-reportportal.enabled=true
-
-# Optional: Connection settings
-reportportal.timeout=30000
-reportportal.retries=3
+reportportal.portfolio=YourPortfolio
+reportportal.project=YourProject
+reportportal.pack=YourPack
 ```
 
-### Usage Examples
-
-#### Basic Usage
-
+**4. Integrate with Your Test Framework:**
 ```java
-import com.reportportal.client.ReportPortalClient;
-import com.reportportal.client.TestCaseRunner;
+import com.reportportal.client.TestExecutionTracker;
 
-public class KeycloakRunner {
-    public static void main(String[] args) {
-        // Initialize TestCaseRunner - automatic test case tracking!
-        TestCaseRunner runner = new TestCaseRunner();
-        long startTime = System.currentTimeMillis();
-        
-        // Each test becomes just 3 lines
-        runner.run("TC-001: Create Realm", "Creating Realm...", () -> {
-            KeycloakAPIs.createRealm(token, realmName);
-        });
-        
-        runner.run("TC-002: Create Role", "Creating Role...", () -> {
-            KeycloakAPIs.createRole(token, realmName, roleName, roleDesc);
-        });
-        
-        // Submit everything - test cases included automatically!
-        long duration = System.currentTimeMillis() - startTime;
-        ReportPortalClient.submitWithRunner(runner, "Enterprise", "Keycloak", "Setup Tests", duration);
-        
-        System.out.println("✅ Results submitted with " + runner.getTotalCount() + " test cases");
-    }
-}
+private final TestExecutionTracker tracker = new TestExecutionTracker();
+
+// In test start hook
+tracker.testStarted(testId);
+
+// In test finish hook
+tracker.testFinished(testId, testName, status, error);
+
+// After all tests complete
+tracker.submitToReportPortal();
 ```
 
-**What TestCaseRunner does automatically:**
-- ✅ Captures timing (start/end/duration)
-- ✅ Records status (passed/failed)
-- ✅ Captures error messages
-- ✅ Captures stack traces
-- ✅ Counts passed/failed tests
-- ✅ Stores all test case details
-
-**No boilerplate code needed!**
-
-#### With Skipped Tests and Duration
-
-```java
-import com.reportportal.client.ReportPortalClient;
-import com.reportportal.client.TestCaseRunner;
-
-public class RegressionTests {
-    public static void main(String[] args) {
-        TestCaseRunner runner = new TestCaseRunner();
-        long startTime = System.currentTimeMillis();
-        
-        // Tests run automatically
-        runner.run("TC-001: Login Test", () -> testLogin());
-        runner.run("TC-002: Search Test", () -> testSearch());
-        
-        // Mark some as skipped
-        runner.skip("TC-003: Payment Test", "Payment gateway unavailable");
-        
-        // Submit with all details captured automatically
-        long duration = System.currentTimeMillis() - startTime;
-        ReportPortalClient.submitWithRunner(runner, "Enterprise", "Regression", "Full Suite", duration);
-        
-        System.out.println("Passed: " + runner.getPassedCount());
-        System.out.println("Failed: " + runner.getFailedCount());
-        System.out.println("Skipped: " + runner.getSkippedCount());
-    }
-}
-```
-
-#### Safe Submission (No Exception)
-
-```java
-// Use submitWithRunner for fail-safe reporting
-// Returns null on failure instead of throwing exception
-TestCaseRunner runner = new TestCaseRunner();
-runner.run("TC-001: Test Case", () -> yourTestLogic());
-
-ReportPortalClient.submitWithRunner(runner, "Portfolio", "Project", "Pack", duration);
-// If submission fails, it logs a warning but doesn't crash your tests
-```
-
-#### Programmatic Submission (Without Properties File)
-
-```java
-import com.reportportal.client.ReportPortalClient;
-import com.reportportal.client.TestCaseRunner;
-
-// With TestCaseRunner (recommended - automatic test case tracking)
-TestCaseRunner runner = new TestCaseRunner();
-runner.run("TC-001: Login", () -> testLogin());
-runner.run("TC-002: Search", () -> testSearch());
-
-long duration = System.currentTimeMillis() - startTime;
-ReportPortalClient.submitWithRunner(
-    runner,
-    "Enterprise",           // portfolio name
-    "Keycloak Automation",  // project name
-    "Smoke Tests",          // pack name
-    duration                // total duration
-);
-
-// Or simple submission without test cases (old way)
-ReportPortalClient.submitRun(
-    "Enterprise",           // portfolio name
-    "Keycloak Automation",  // project name
-    "Smoke Tests",          // pack name
-    45,                     // passed
-    2                       // failed
-);
-```
-
-#### Using Builder Pattern (Advanced - Manual Test Case Management)
-
-```java
-import com.reportportal.client.ReportPortalClient;
-import com.reportportal.client.RunSubmission;
-import com.reportportal.client.TestCase;
-
-// For advanced users who need fine-grained control
-RunSubmission submission = ReportPortalClient.builder()
-    .portfolio("Enterprise")
-    .project("Keycloak")
-    .pack("Regression Suite")
-    .passed(89)
-    .failed(3)
-    .skipped(5)
-    .duration(7200000L)
-    .environment("Production")
-    .tags("critical,regression,nightly")
-    .notes("Nightly regression run")
-    .build()
-    .submit();
-
-System.out.println("Run ID: " + submission.getRunId());
-
-// Or use TestCaseRunner for automatic tracking (recommended)
-TestCaseRunner runner = new TestCaseRunner();
-runner.run("TC-001: Test", () -> yourTestLogic());
-ReportPortalClient.submitWithRunner(runner, "Enterprise", "Keycloak", "Regression", duration);
-```
+For framework-specific examples (JUnit 5, TestNG, Cucumber), see the [Integration Guide](client-library/INTEGRATION_GUIDE.md).
 
 ---
 

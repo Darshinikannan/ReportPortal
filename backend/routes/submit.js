@@ -80,6 +80,15 @@ router.post('/submit', async (req, res) => {
             portfolioName: req.body.portfolioName
         });
 
+        if (req.body.testResults && req.body.testResults.length > 0) {
+            console.log(`   📋 Test Results Array (${req.body.testResults.length} tests):`, 
+                req.body.testResults.map(t => ({ name: t.testCase, status: t.status }))
+            );
+        } else {
+            console.log('   ⚠️  No testResults array in request body');
+            console.log('   Request body keys:', Object.keys(req.body));
+        }
+
         // Resolve entities (find existing or create new)
         const { portfolio, project, pack, resolution } = await resolver.resolve({
             packName: req.body.packName,
@@ -105,6 +114,18 @@ router.post('/submit', async (req, res) => {
         const total = req.body.total || (passed + failed + skipped);
         const passRate = total > 0 ? Math.round((passed / total) * 100) : 0;
 
+        // Calculate status based on results (if not explicitly provided)
+        let status = req.body.status;
+        if (!status) {
+            if (failed > 0) {
+                status = 'failed';
+            } else if (passed > 0) {
+                status = 'passed';
+            } else {
+                status = 'skipped';
+            }
+        }
+
         // Create automation run with resolved IDs
         const runData = {
             id: runId,
@@ -116,7 +137,7 @@ router.post('/submit', async (req, res) => {
             packName: pack ? pack.name : req.body.packName || 'Unnamed Pack',
             projectName: project.name,
             portfolioName: portfolio.name,
-            status: req.body.status || 'passed',
+            status: status,
             passed,
             failed,
             skipped,

@@ -99,8 +99,8 @@
       "$oid": "674a4e5f6a7b8c9d0e1f2a02"
     },
     "id": "RUN-1248",
-    "name": "Insurance Regression Pack - Run #1248",
-    "displayName": "Insurance Full Regression Suite - Scheduled Run",
+    "name": "Enterprise Regression Pack - Run #1248",
+    "displayName": "Enterprise Full Regression Suite - Scheduled Run",
     "packId": {
       "$oid": "674a3d4e5f6a7b8c9d0e1f02"
     },
@@ -110,9 +110,9 @@
     "portfolioId": {
       "$oid": "674a1b2c3d4e5f6a7b8c9d02"
     },
-    "packName": "Insurance Regression Pack",
-    "projectName": "Insurance Portal",
-    "portfolioName": "Insurance",
+    "packName": "Enterprise Regression Pack",
+    "projectName": "Enterprise Portal",
+    "portfolioName": "Enterprise",
     "status": "passed",
     "passed": 24,
     "failed": 1,
@@ -128,16 +128,16 @@
     },
     "environment": {
       "name": "staging",
-      "url": "https://insurance-staging.theaa.internal",
+      "url": "https://enterprise-staging.theaa.internal",
       "browser": "Chrome 125.0",
       "os": "Ubuntu 22.04",
       "resolution": "1920x1080"
     },
     "cicd": {
       "system": "GitHub Actions",
-      "jobName": "Insurance-Regression",
+      "jobName": "Enterprise-Regression",
       "buildNumber": "RUN-458",
-      "buildUrl": "https://github.com/theaa/insurance-automation/actions/runs/458",
+      "buildUrl": "https://github.com/theaa/enterprise-automation/actions/runs/458",
       "executor": "github-runner-03"
     },
     "trigger": {
