@@ -1,0 +1,206 @@
+[
+  {
+    "_id": {
+      "$oid": "674a3d4e5f6a7b8c9d0e1f01"
+    },
+    "name": "RABO Smoke Pack",
+    "displayName": "RABO Critical Path Smoke Tests",
+    "description": "Critical smoke tests covering RABO system health checks, core workflows, and essential functionality",
+    "projectId": {
+      "$oid": "674a2c3d4e5f6a7b8c9d0e01"
+    },
+    "portfolioId": {
+      "$oid": "674a1b2c3d4e5f6a7b8c9d01"
+    },
+    "projectName": "RABO",
+    "portfolioName": "Road",
+    "testCount": 25,
+    "testCategories": {
+      "smoke": 15,
+      "critical": 10,
+      "regression": 0,
+      "e2e": 0
+    },
+    "runCount": 1,
+    "passRate": 96,
+    "passed": 24,
+    "failed": 1,
+    "skipped": 0,
+    "avgDuration": 780,
+    "minDuration": 780,
+    "maxDuration": 780,
+    "failureRate": 4,
+    "consecutiveFailures": 0,
+    "lastFailure": {
+      "testCase": "TC-003: Dashboard Load",
+      "timestamp": {
+        "$date": "2026-06-02T09:15:00.000Z"
+      },
+      "error": "Timeout: Element not found within 30 seconds"
+    },
+    "flakyTests": [
+      {
+        "testCase": "TC-003: Dashboard Load",
+        "flakyRate": 4,
+        "lastFlake": {
+          "$date": "2026-06-02T09:15:00.000Z"
+        }
+      }
+    ],
+    "configuration": {
+      "environment": "staging",
+      "browser": "chrome",
+      "browserVersion": "125.0",
+      "headless": true,
+      "parallel": false,
+      "retries": 2,
+      "timeout": 30000,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    "schedule": {
+      "type": "daily",
+      "time": "06:00",
+      "timezone": "Europe/London",
+      "enabled": true,
+      "daysOfWeek": [1, 2, 3, 4, 5]
+    },
+    "testSuite": {
+      "path": "tests/rabo/smoke",
+      "files": [
+        "login.spec.ts",
+        "dashboard.spec.ts",
+        "breakdown-create.spec.ts",
+        "breakdown-dispatch.spec.ts",
+        "breakdown-complete.spec.ts"
+      ]
+    },
+    "tags": [
+      "smoke",
+      "critical-path",
+      "pre-deployment",
+      "health-check"
+    ],
+    "priority": "high",
+    "notifications": {
+      "email": ["road-qa-team@theaa.com"],
+      "slack": {
+        "channel": "#road-qa-alerts",
+        "mentions": ["@john.smith"]
+      },
+      "onFailure": true,
+      "onSuccess": false,
+      "onFlaky": true
+    },
+    "lastRun": {
+      "$date": "2026-06-02T09:15:00.000Z"
+    },
+    "createdAt": {
+      "$date": "2026-03-01T12:00:00.000Z"
+    },
+    "lastUpdated": {
+      "$date": "2026-06-02T10:00:00.000Z"
+    },
+    "version": 1
+  },
+  {
+    "_id": {
+      "$oid": "674a3d4e5f6a7b8c9d0e1f02"
+    },
+    "name": "Insurance Regression Pack",
+    "displayName": "Insurance Full Regression Suite",
+    "description": "Comprehensive regression tests for insurance systems covering all policies, claims, and customer workflows",
+    "projectId": {
+      "$oid": "674a2c3d4e5f6a7b8c9d0e02"
+    },
+    "portfolioId": {
+      "$oid": "674a1b2c3d4e5f6a7b8c9d02"
+    },
+    "projectName": "Insurance Portal",
+    "portfolioName": "Insurance",
+    "testCount": 25,
+    "testCategories": {
+      "smoke": 10,
+      "critical": 8,
+      "regression": 7,
+      "e2e": 0
+    },
+    "runCount": 1,
+    "passRate": 96,
+    "passed": 24,
+    "failed": 1,
+    "skipped": 0,
+    "avgDuration": 850,
+    "minDuration": 850,
+    "maxDuration": 850,
+    "failureRate": 4,
+    "consecutiveFailures": 0,
+    "lastFailure": {
+      "testCase": "TC-008: Device Pairing",
+      "timestamp": {
+        "$date": "2026-06-02T10:30:00.000Z"
+      },
+      "error": "Connection timeout: Device did not respond"
+    },
+    "flakyTests": [],
+    "configuration": {
+      "environment": "staging",
+      "browser": "chrome",
+      "browserVersion": "125.0",
+      "headless": true,
+      "parallel": false,
+      "retries": 2,
+      "timeout": 30000,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    "schedule": {
+      "type": "weekly",
+      "time": "02:00",
+      "timezone": "Europe/London",
+      "enabled": true,
+      "daysOfWeek": [1, 4]
+    },
+    "testSuite": {
+      "path": "tests/insurance/regression",
+      "files": [
+        "device-pairing.spec.js",
+        "automation-rules.spec.js",
+        "scenes.spec.js",
+        "notifications.spec.js",
+        "energy-monitoring.spec.js"
+      ]
+    },
+    "tags": [
+      "regression",
+      "smart-home",
+      "iot",
+      "full-suite"
+    ],
+    "priority": "high",
+    "notifications": {
+      "email": ["home-qa-team@theaa.com"],
+      "slack": {
+        "channel": "#home-qa-alerts",
+        "mentions": ["@sarah.johnson"]
+      },
+      "onFailure": true,
+      "onSuccess": false,
+      "onFlaky": true
+    },
+    "lastRun": {
+      "$date": "2026-06-02T10:30:00.000Z"
+    },
+    "createdAt": {
+      "$date": "2026-03-15T12:00:00.000Z"
+    },
+    "lastUpdated": {
+      "$date": "2026-06-02T11:00:00.000Z"
+    },
+    "version": 1
+  }
+]

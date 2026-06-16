@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Portal - Dashboard</title>
+     <link rel="stylesheet" href="../css/styles.css?v=4.8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-chart-line"></i>
+                <span>Report Portal</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="portfolios.html"><i class="fas fa-briefcase"></i> Portfolios</a></li>
+                <li><a href="projects.html"><i class="fas fa-project-diagram"></i> Projects</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <i class="fas fa-home"></i>
+        </div>
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>Automation Dashboard</h1>
+        </div>
+
+        <!-- Section 1: Global Summary KPIs -->
+        <section class="kpi-section">
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="kpi-content">
+                        <h3>Total Portfolios</h3>
+                        <p class="kpi-value" id="totalPortfolios">-</p>
+                        <span class="kpi-trend" id="portfoliosTrend">-</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <i class="fas fa-folder-open"></i>
+                    </div>
+                    <div class="kpi-content">
+                        <h3>Total Projects</h3>
+                        <p class="kpi-value" id="totalProjects">-</p>
+                        <span class="kpi-trend" id="projectsTrend">-</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <div class="kpi-content">
+                        <h3>Total Automation Packs</h3>
+                        <p class="kpi-value" id="totalPacks">-</p>
+                        <span class="kpi-trend" id="packsTrend">-</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <div class="kpi-content">
+                        <h3>Total Automation Runs</h3>
+                        <p class="kpi-value" id="totalRuns">-</p>
+                        <span class="kpi-trend" id="runsTrend">-</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background: linear-gradient(135deg, #90EE90 0%, #32CD32 100%);">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="kpi-content">
+                        <h3>Total Passed</h3>
+                        <p class="kpi-value" id="totalPassed">-</p>
+                        <span class="kpi-trend" id="passedTrend">-</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                    <div class="kpi-content">
+                        <h3>Total Failed</h3>
+                        <p class="kpi-value" id="totalFailed">-</p>
+                        <span class="kpi-trend" id="failedTrend">-</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Portfolios -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-briefcase"></i> Portfolios</h2>
+                <button class="btn-secondary" onclick="refreshPortfolios()">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+            </div>
+
+            <!-- Portfolios Grid -->
+            <div class="portfolio-grid" id="portfolioGrid">
+                <!-- Portfolio cards will be dynamically loaded here -->
+            </div>
+
+            <div class="section-footer">
+                <a href="portfolios.html" class="btn-view-all">
+                    <i class="fas fa-briefcase"></i> View All Portfolios
+                </a>
+            </div>
+        </section>
+
+
+
+        <!-- Section 4: Recent Launches - Automation Runs Table -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-rocket"></i> Recent Launches</h2>
+                <div class="header-actions">
+                    <button class="btn-secondary" onclick="refreshTable()">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Run ID</th>
+                            <th>Portfolio</th>
+                            <th>Project</th>
+                            <th>Pack</th>
+                            <th>Start Time</th>
+                            <th>Duration</th>
+                            <th>Status</th>
+                            <th>Pass Rate</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="runsTableBody">
+                        <!-- Automation run rows will be dynamically loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 The AA - Report Portal. All rights reserved.</p>
+            <p id="lastUpdated">Last Updated: <span id="lastUpdatedTime">Loading...</span></p>
+        </div>
+    </footer>
+    <!-- Socket.IO Client -->
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

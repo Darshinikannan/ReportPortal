@@ -1,0 +1,192 @@
+[
+  {
+    "_id": {
+      "$oid": "674a4e5f6a7b8c9d0e1f2a01"
+    },
+    "id": "RUN-1247",
+    "name": "RABO Smoke Pack - Run #1247",
+    "displayName": "RABO Critical Path Smoke Tests - Scheduled Run",
+    "packId": {
+      "$oid": "674a3d4e5f6a7b8c9d0e1f01"
+    },
+    "projectId": {
+      "$oid": "674a2c3d4e5f6a7b8c9d0e01"
+    },
+    "portfolioId": {
+      "$oid": "674a1b2c3d4e5f6a7b8c9d01"
+    },
+    "packName": "RABO Smoke Pack",
+    "projectName": "RABO",
+    "portfolioName": "Road",
+    "status": "passed",
+    "passed": 24,
+    "failed": 1,
+    "skipped": 0,
+    "total": 25,
+    "passRate": 96,
+    "duration": 780,
+    "startTime": {
+      "$date": "2026-06-02T09:02:00.000Z"
+    },
+    "endTime": {
+      "$date": "2026-06-02T09:15:00.000Z"
+    },
+    "environment": {
+      "name": "staging",
+      "url": "https://rabo-staging.theaa.internal",
+      "browser": "Chrome 125.0",
+      "os": "Windows 11",
+      "resolution": "1920x1080"
+    },
+    "cicd": {
+      "system": "Jenkins",
+      "jobName": "RABO-Smoke-Daily",
+      "buildNumber": "BUILD-5847",
+      "buildUrl": "https://jenkins.theaa.com/job/RABO-Smoke-Daily/5847",
+      "executor": "jenkins-agent-02"
+    },
+    "trigger": {
+      "type": "scheduled",
+      "triggeredBy": "system",
+      "triggeredAt": {
+        "$date": "2026-06-02T06:00:00.000Z"
+      },
+      "reason": "Daily scheduled smoke test"
+    },
+    "testResults": [
+      {
+        "testCase": "TC-001: Launch Application",
+        "status": "passed",
+        "duration": 15,
+        "retries": 0
+      },
+      {
+        "testCase": "TC-002: Login Validation",
+        "status": "passed",
+        "duration": 25,
+        "retries": 0
+      },
+      {
+        "testCase": "TC-003: Dashboard Load",
+        "status": "failed",
+        "duration": 35,
+        "retries": 2,
+        "error": "Timeout: Element not found within 30 seconds"
+      }
+    ],
+    "failures": [
+      {
+        "testCase": "TC-003: Dashboard Load",
+        "error": "Timeout: Element not found within 30 seconds",
+        "stackTrace": "at DashboardPage.waitForLoad (dashboard.page.ts:45:12)\\nat test (dashboard.spec.ts:23:5)"
+      }
+    ],
+    "reports": {
+      "html": "https://reports.qaportal.com/runs/1247/index.html",
+      "json": "https://reports.qaportal.com/runs/1247/report.json"
+    },
+    "version": 1,
+    "tags": ["smoke", "pre-deployment", "critical", "daily"],
+    "createdAt": {
+      "$date": "2026-06-02T09:02:00.000Z"
+    },
+    "completedAt": {
+      "$date": "2026-06-02T09:15:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "674a4e5f6a7b8c9d0e1f2a02"
+    },
+    "id": "RUN-1248",
+    "name": "Insurance Regression Pack - Run #1248",
+    "displayName": "Insurance Full Regression Suite - Scheduled Run",
+    "packId": {
+      "$oid": "674a3d4e5f6a7b8c9d0e1f02"
+    },
+    "projectId": {
+      "$oid": "674a2c3d4e5f6a7b8c9d0e02"
+    },
+    "portfolioId": {
+      "$oid": "674a1b2c3d4e5f6a7b8c9d02"
+    },
+    "packName": "Insurance Regression Pack",
+    "projectName": "Insurance Portal",
+    "portfolioName": "Insurance",
+    "status": "passed",
+    "passed": 24,
+    "failed": 1,
+    "skipped": 0,
+    "total": 25,
+    "passRate": 96,
+    "duration": 850,
+    "startTime": {
+      "$date": "2026-06-02T10:16:00.000Z"
+    },
+    "endTime": {
+      "$date": "2026-06-02T10:30:00.000Z"
+    },
+    "environment": {
+      "name": "staging",
+      "url": "https://insurance-staging.theaa.internal",
+      "browser": "Chrome 125.0",
+      "os": "Ubuntu 22.04",
+      "resolution": "1920x1080"
+    },
+    "cicd": {
+      "system": "GitHub Actions",
+      "jobName": "Insurance-Regression",
+      "buildNumber": "RUN-458",
+      "buildUrl": "https://github.com/theaa/insurance-automation/actions/runs/458",
+      "executor": "github-runner-03"
+    },
+    "trigger": {
+      "type": "scheduled",
+      "triggeredBy": "system",
+      "triggeredAt": {
+        "$date": "2026-06-02T02:00:00.000Z"
+      },
+      "reason": "Weekly scheduled regression test"
+    },
+    "testResults": [
+      {
+        "testCase": "TC-005: Device Discovery",
+        "status": "passed",
+        "duration": 20,
+        "retries": 0
+      },
+      {
+        "testCase": "TC-006: Automation Rules",
+        "status": "passed",
+        "duration": 30,
+        "retries": 0
+      },
+      {
+        "testCase": "TC-008: Device Pairing",
+        "status": "failed",
+        "duration": 40,
+        "retries": 2,
+        "error": "Connection timeout: Device did not respond"
+      }
+    ],
+    "failures": [
+      {
+        "testCase": "TC-008: Device Pairing",
+        "error": "Connection timeout: Device did not respond",
+        "stackTrace": "at DevicePage.pair (device.page.js:78:15)\\nat test (device-pairing.spec.js:45:8)"
+      }
+    ],
+    "reports": {
+      "html": "https://reports.qaportal.com/runs/1248/index.html",
+      "json": "https://reports.qaportal.com/runs/1248/report.json"
+    },
+    "version": 1,
+    "tags": ["regression", "smart-home", "iot", "weekly"],
+    "createdAt": {
+      "$date": "2026-06-02T10:16:00.000Z"
+    },
+    "completedAt": {
+      "$date": "2026-06-02T10:30:00.000Z"
+    }
+  }
+]

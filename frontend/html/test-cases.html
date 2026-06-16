@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Portal - Test Cases</title>
+    <link rel="stylesheet" href="../css/styles.css?v=4.8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-chart-line"></i>
+                <span>Report Portal</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="portfolios.html"><i class="fas fa-briefcase"></i> Portfolios</a></li>
+                <li><a href="projects.html"><i class="fas fa-project-diagram"></i> Projects</a></li>
+                <li><a href="automation-runs.html"><i class="fas fa-play-circle"></i> Runs</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="index.html"><i class="fas fa-home"></i></a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="automation-runs.html">Runs</a>
+            <i class="fas fa-chevron-right"></i>
+            <span id="runIdBreadcrumb">Test Cases</span>
+        </div>
+
+        <!-- Run Summary Header -->
+        <div class="page-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <h1><i class="fas fa-list-check"></i> Test Case Results</h1>
+                    <p class="subtitle" id="runSummary">Loading test case details...</p>
+                </div>
+                <div class="header-right">
+                    <div class="header-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Total Tests</span>
+                            <span class="stat-number" id="totalTests">-</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Passed</span>
+                            <span class="stat-number" style="color: #28a745;" id="passedTests">-</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Failed</span>
+                            <span class="stat-number" style="color: #dc3545;" id="failedTests">-</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Skipped</span>
+                            <span class="stat-number" style="color: #ffc107;" id="skippedTests">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Run Details Card -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-info-circle"></i> Run Information</h2>
+            </div>
+            <div class="run-info-grid" id="runInfoGrid">
+                <!-- Populated dynamically -->
+            </div>
+        </section>
+
+        <!-- Test Cases Table -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-vial"></i> Individual Test Cases</h2>
+                <div class="header-actions">
+                    <button class="btn-secondary" onclick="filterTestCases('all')">
+                        <i class="fas fa-list"></i> All
+                    </button>
+                    <button class="btn-secondary" onclick="filterTestCases('passed')" style="color: #28a745;">
+                        <i class="fas fa-check"></i> Passed
+                    </button>
+                    <button class="btn-secondary" onclick="filterTestCases('failed')" style="color: #dc3545;">
+                        <i class="fas fa-times"></i> Failed
+                    </button>
+                    <button class="btn-secondary" onclick="filterTestCases('skipped')" style="color: #ffc107;">
+                        <i class="fas fa-forward"></i> Skipped
+                    </button>
+                    <button class="btn-secondary" onclick="exportTestCases()">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 5%;">#</th>
+                            <th style="width: 38%;">Test Case Name</th>
+                            <th style="width: 10%;">Status</th>
+                            <th style="width: 10%;">Duration</th>
+                            <th style="width: 8%;">Retries</th>
+                            <th style="width: 29%;">Error Message</th>
+                        </tr>
+                    </thead>
+                    <tbody id="testCasesTableBody">
+                        <!-- Test cases loaded dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- No Data Message -->
+            <div id="noDataMessage" style="display: none; text-align: center; padding: 40px;">
+                <i class="fas fa-inbox" style="font-size: 48px; color: #ccc;"></i>
+                <p style="margin-top: 16px; color: #666;">No test case data available for this run</p>
+                <p style="color: #999; font-size: 14px;">Test case level data must be submitted from the test suite</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Test Case Detail Modal -->
+    <div id="detailModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Test Case Details</h2>
+                <span class="modal-close" onclick="closeDetailModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Test case details populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 The AA - Report Portal. All rights reserved.</p>
+            <p>Last Updated: <span id="lastUpdated">Loading...</span></p>
+        </div>
+    </footer>
+
+    <script src="../js/test-cases.js?v=3.2"></script>
+</body>
+</html>

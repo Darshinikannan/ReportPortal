@@ -1,0 +1,78 @@
+{
+  "_id": {
+    "$oid": "674a0a1b2c3d4e5f6a7b8c90"
+  },
+  "totalPortfolios": 2,
+  "totalProjects": 2,
+  "totalAutomationPacks": 2,
+  "totalAutomationRuns": 2,
+  "totalTests": 50,
+  "totalPassedTests": 48,
+  "totalFailedTests": 2,
+  "totalSkippedTests": 0,
+  "globalPassRate": 96,
+  "activePortfolios": 2,
+  "activeProjects": 2,
+  "activeAutomationPacks": 2,
+  "runsLast24Hours": 2,
+  "runsLast7Days": 2,
+  "runsLast30Days": 2,
+  "passRateTrend": {
+    "current": 96,
+    "lastWeek": 95.8,
+    "lastMonth": 94.2,
+    "change": "+1.8%"
+  },
+  "executionTrend": {
+    "currentWeek": 2,
+    "lastWeek": 0,
+    "change": "+100%"
+  },
+  "avgExecutionTime": 815,
+  "totalExecutionTime": 1630,
+  "environmentStats": {
+    "staging": {
+      "runs": 2,
+      "passRate": 96
+    },
+    "production": {
+      "runs": 0,
+      "passRate": 0
+    }
+  },
+  "statusBreakdown": {
+    "passed": 2,
+    "failed": 0,
+    "running": 0,
+    "pending": 0
+  },
+  "topFailingTests": [
+    {
+      "testCase": "TC-003: Dashboard Load",
+      "failCount": 1,
+      "packName": "RABO Smoke Pack"
+    }
+  ],
+  "mostActivePortfolio": {
+    "name": "Road",
+    "runCount": 1
+  },
+  "mostActiveProject": {
+    "name": "RABO",
+    "runCount": 1
+  },
+  "mostActiveAutomationPack": {
+    "name": "RABO Smoke Pack",
+    "runCount": 1
+  },
+  "lastRunTime": {
+    "$date": "2026-06-02T09:15:00.000Z"
+  },
+  "lastUpdated": {
+    "$date": "2026-06-02T10:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-15T08:00:00.000Z"
+  },
+  "version": 2
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Portal - Automation Packs</title>
+    <link rel="stylesheet" href="../css/styles.css?v=4.8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-chart-line"></i>
+                <span>Report Portal</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="portfolios.html"><i class="fas fa-briefcase"></i> Portfolios</a></li>
+                <li><a href="projects.html"><i class="fas fa-project-diagram"></i> Projects</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="index.html"><i class="fas fa-home"></i></a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="portfolios.html">Portfolios</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="projects.html">Projects</a>
+            <i class="fas fa-chevron-right" id="projectBreadcrumbArrow" style="display: none;"></i>
+            <span id="projectBreadcrumb" style="display: none;"></span>
+            <i class="fas fa-chevron-right"></i>
+            <span id="pageTitle">Automation Packs</span>
+        </div>
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <h1 id="pageHeaderTitle"><i class="fas fa-box"></i> Automation Packs</h1>
+                    <p class="subtitle" id="pageSubtitle">Test automation packs across projects</p>
+                </div>
+                <div class="header-right">
+                    <div class="header-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Total Packs</span>
+                            <span class="stat-number" id="totalPacks">-</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Total Runs</span>
+                            <span class="stat-number" id="totalRuns">-</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Avg Pass Rate</span>
+                            <span class="stat-number" id="avgPassRate">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1: Automation Pack Table -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-box-open"></i> Automation Packs Overview</h2>
+                <div class="header-actions">
+                    <button class="btn-secondary" onclick="refreshTable()">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                    <button class="btn-secondary" onclick="exportTable()">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                </div>
+            </div>
+
+            <!-- Automation Packs Table -->
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Pack Name</th>
+                            <th>Pack Type</th>
+                            <th>Total Runs (3M)</th>
+                            <th>Total Tests</th>
+                            <th>Passed</th>
+                            <th>Failed</th>
+                            <th>Skipped</th>
+                            <th>Pass Rate</th>
+                            <th>Avg Duration</th>
+                            <th>Last Run</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="packsTableBody">
+                        <!-- Automation pack rows will be dynamically loaded here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="pagination" id="pagination" style="display: none;">
+                <button class="btn-secondary" id="prevBtn" onclick="previousPage()"><i class="fas fa-chevron-left"></i> Previous</button>
+                <span class="page-info" id="pageInfo">Page 1 of 1</span>
+                <button class="btn-secondary" id="nextBtn" onclick="nextPage()">Next <i class="fas fa-chevron-right"></i></button>
+            </div>
+            
+            <div class="section-footer">
+                <a href="automation-runs.html" class="btn-view-all">
+                    <i class="fas fa-play-circle"></i> View All Automation Runs
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 The AA - Report Portal. All rights reserved.</p>
+            <p>Last Updated: <span id="lastUpdated">Loading...</span></p>
+        </div>
+    </footer>
+    <!-- Socket.IO Client -->
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="../js/automation-packs.js?v=3.2"></script>
+</body>
+</html>

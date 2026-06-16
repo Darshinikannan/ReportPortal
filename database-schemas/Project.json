@@ -1,0 +1,202 @@
+[
+  {
+    "_id": {
+      "$oid": "674a2c3d4e5f6a7b8c9d0e01"
+    },
+    "name": "RABO",
+    "displayName": "Road Assistance Breakdown Operations",
+    "description": "End-to-end testing suite for breakdown operations including dispatch, tracking, and completion workflows",
+    "portfolioId": {
+      "$oid": "674a1b2c3d4e5f6a7b8c9d01"
+    },
+    "portfolioName": "Road",
+    "packCount": 1,
+    "runCount": 1,
+    "totalTests": 25,
+    "passedTests": 24,
+    "failedTests": 1,
+    "skippedTests": 0,
+    "passRate": 96,
+    "status": "active",
+    "health": "good",
+    "owner": "John Smith",
+    "ownerEmail": "john.smith@theaa.com",
+    "team": "Road QA Team",
+    "teamMembers": [
+      {
+        "name": "John Smith",
+        "role": "Lead QA Engineer",
+        "email": "john.smith@theaa.com"
+      },
+      {
+        "name": "Emma Wilson",
+        "role": "QA Engineer",
+        "email": "emma.wilson@theaa.com"
+      }
+    ],
+    "repository": {
+      "url": "https://github.com/theaa/rabo-automation",
+      "branch": "main",
+      "lastCommit": "a3f5d9e"
+    },
+    "framework": "Playwright",
+    "language": "TypeScript",
+    "cicd": "Jenkins",
+    "applicationUnderTest": {
+      "name": "RABO System",
+      "version": "2.3.0",
+      "urls": {
+        "staging": "https://rabo-staging.theaa.internal",
+        "production": "https://rabo.theaa.com"
+      }
+    },
+    "avgExecutionTime": 780,
+    "totalExecutionTime": 780,
+    "successfulRuns": 1,
+    "failedRuns": 0,
+    "flakyTests": 1,
+    "environments": {
+      "staging": {
+        "enabled": true,
+        "url": "https://rabo-staging.theaa.internal",
+        "runCount": 1
+      },
+      "production": {
+        "enabled": false,
+        "url": "https://rabo.theaa.com",
+        "runCount": 0
+      }
+    },
+    "testCategories": {
+      "smoke": 15,
+      "critical": 10,
+      "regression": 0,
+      "e2e": 0
+    },
+    "tags": [
+      "critical",
+      "smoke-tests",
+      "breakdown-ops"
+    ],
+    "priority": "high",
+    "notifications": {
+      "email": [
+        "road-qa-team@theaa.com"
+      ],
+      "slack": "#road-qa-alerts",
+      "onFailure": true,
+      "onSuccess": false,
+      "failureThreshold": 2
+    },
+    "lastRun": {
+      "$date": "2026-06-02T09:15:00.000Z"
+    },
+    "createdAt": {
+      "$date": "2026-02-01T10:00:00.000Z"
+    },
+    "lastUpdated": {
+      "$date": "2026-06-02T10:00:00.000Z"
+    },
+    "version": 1
+  },
+  {
+    "_id": {
+      "$oid": "674a2c3d4e5f6a7b8c9d0e02"
+    },
+    "name": "Insurance Portal",
+    "displayName": "Insurance Automation Testing",
+    "description": "Comprehensive testing suite for insurance systems including policies, claims, and customer workflows",
+    "portfolioId": {
+      "$oid": "674a1b2c3d4e5f6a7b8c9d02"
+    },
+    "portfolioName": "Insurance",
+    "packCount": 1,
+    "runCount": 1,
+    "totalTests": 25,
+    "passedTests": 24,
+    "failedTests": 1,
+    "skippedTests": 0,
+    "passRate": 96,
+    "status": "active",
+    "health": "good",
+    "owner": "Sarah Johnson",
+    "ownerEmail": "sarah.johnson@theaa.com",
+    "team": "Insurance QA Team",
+    "teamMembers": [
+      {
+        "name": "Sarah Johnson",
+        "role": "Lead QA Engineer",
+        "email": "sarah.johnson@theaa.com"
+      },
+      {
+        "name": "Michael Chen",
+        "role": "QA Engineer",
+        "email": "michael.chen@theaa.com"
+      }
+    ],
+    "repository": {
+      "url": "https://github.com/theaa/insurance-automation",
+      "branch": "main",
+      "lastCommit": "b4e6c1f"
+    },
+    "framework": "Cypress",
+    "language": "JavaScript",
+    "cicd": "GitHub Actions",
+    "applicationUnderTest": {
+      "name": "Insurance Platform",
+      "version": "3.1.0",
+      "urls": {
+        "staging": "https://insurance-staging.theaa.internal",
+        "production": "https://insurance.theaa.com"
+      }
+    },
+    "avgExecutionTime": 850,
+    "totalExecutionTime": 850,
+    "successfulRuns": 1,
+    "failedRuns": 0,
+    "flakyTests": 0,
+    "environments": {
+      "staging": {
+        "enabled": true,
+        "url": "https://insurance-staging.theaa.internal",
+        "runCount": 1
+      },
+      "production": {
+        "enabled": false,
+        "url": "https://insurance.theaa.com",
+        "runCount": 0
+      }
+    },
+    "testCategories": {
+      "smoke": 10,
+      "critical": 8,
+      "regression": 7,
+      "e2e": 0
+    },
+    "tags": [
+      "insurance",
+      "regression",
+      "full-suite"
+    ],
+    "priority": "high",
+    "notifications": {
+      "email": [
+        "home-qa-team@theaa.com"
+      ],
+      "slack": "#home-qa-alerts",
+      "onFailure": true,
+      "onSuccess": false,
+      "failureThreshold": 2
+    },
+    "lastRun": {
+      "$date": "2026-06-02T10:30:00.000Z"
+    },
+    "createdAt": {
+      "$date": "2026-02-15T10:00:00.000Z"
+    },
+    "lastUpdated": {
+      "$date": "2026-06-02T11:00:00.000Z"
+    },
+    "version": 1
+  }
+]
