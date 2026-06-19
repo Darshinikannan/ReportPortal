@@ -9,12 +9,17 @@ import java.util.Properties;
 
 /**
  * Configuration loader for Report Portal client.
- * Loads settings from reportportal.properties file or environment variables.
+ * Loads settings from application.properties, falls back to reportportal.properties,
+ * or throws an error if neither is found.
  */
 public class ReportPortalConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(ReportPortalConfig.class);
-    private static final String CONFIG_FILE = "reportportal.properties";
+    
+    // Define the configuration file hierarchy
+    private static final String PRIMARY_CONFIG_FILE = "application.properties";
+    private static final String FALLBACK_CONFIG_FILE = "reportportal.properties";
+    
     private static final String DEFAULT_URL = "http://localhost:5000";
     private static final int DEFAULT_TIMEOUT = 5000; // 5 seconds
     private static final int DEFAULT_RETRIES = 2;
@@ -27,23 +32,48 @@ public class ReportPortalConfig {
     }
 
     /**
-     * Load properties from reportportal.properties file or environment variables
+     * Load properties looking for application.properties first, then reportportal.properties.
+     * Throws an IllegalStateException if neither file is found.
      */
     private void loadProperties() {
-        // Try to load from classpath
+        // 1. Try to load application.properties
+        if (attemptLoadFromFile(PRIMARY_CONFIG_FILE)) {
+            return;
+        }
+        
+        // 2. If primary fails, try to load reportportal.properties
+        logger.info("'{}' not found. Falling back to '{}'...", PRIMARY_CONFIG_FILE, FALLBACK_CONFIG_FILE);
+        if (attemptLoadFromFile(FALLBACK_CONFIG_FILE)) {
+            return;
+        }
+        
+        // 3. If both fail, throw a hard error
+        String errorMessage = String.format("Critical Configuration Error: Neither '%s' nor '%s' could be found in the classpath.", 
+                                            PRIMARY_CONFIG_FILE, FALLBACK_CONFIG_FILE);
+        logger.error(errorMessage);
+        throw new IllegalStateException(errorMessage);
+    }
+
+    /**
+     * Helper method to read the properties file from the classpath.
+     * @param fileName The name of the file to load
+     * @return true if successfully loaded, false if the file was not found
+     */
+    private boolean attemptLoadFromFile(String fileName) {
         try (InputStream input = Thread.currentThread()
                 .getContextClassLoader()
-                .getResourceAsStream(CONFIG_FILE)) {
+                .getResourceAsStream(fileName)) {
             
             if (input != null) {
                 properties.load(input);
-                logger.info("Report Portal configuration loaded from {}", CONFIG_FILE);
-            } else {
-                logger.warn("Configuration file {} not found in classpath. Using defaults and environment variables.", CONFIG_FILE);
+                logger.info("✅ Report Portal configuration successfully loaded from {}", fileName);
+                return true;
             }
         } catch (IOException e) {
-            logger.warn("Failed to load configuration file: {}. Using defaults and environment variables.", e.getMessage());
+            logger.warn("Failed to read configuration file '{}': {}", fileName, e.getMessage());
         }
+        
+        return false;
     }
 
     /**
